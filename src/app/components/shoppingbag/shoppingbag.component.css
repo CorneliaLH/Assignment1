@@ -1,0 +1,45 @@
+section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+label {
+  margin-top: 20px;
+}
+
+input {
+  width: 20%;
+}
+
+button {
+  margin-top: 10px;
+  width: 20%;
+}
+
+ul {
+  border: 3px solid purple;
+  padding: 5px;
+  list-style-type: none;
+}
+/*# sourceMappingURL=shoppingbag.component.css.map */

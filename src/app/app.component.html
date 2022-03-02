@@ -1,1 +1,24 @@
-<router-outlet></router-outlet>
+<header>
+  <div>Logo</div>
+  <nav>
+    <ul>
+      <li>
+        <a
+          routerLink=""
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Hem</a
+        >
+      </li>
+      <li><a routerLink="/products" routerLinkActive="active">Produkter</a></li>
+      <li><a routerLink="/admin" routerLinkActive>Admin</a></li>
+      <li><a routerLink="/bag" routerLinkActive>Shoppingbag</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer><p>Copyright</p></footer>

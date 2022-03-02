@@ -1,0 +1,8 @@
+<ul>
+  <li>
+    <h2>{{ movie.name }}</h2>
+    <img [src]="movie.imageUrl" alt="Bild på {{ movie.name }}" />
+    <p>{{ movie.price }} kronor</p>
+    <button [routerLink]="['/products', movie.id]">Mer om filmen</button>
+  </li>
+</ul>

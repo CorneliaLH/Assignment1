@@ -1,0 +1,39 @@
+ul {
+  border: 2px solid lightblue;
+  width: 200px;
+  height: 450px;
+  padding: 20px;
+  margin: 30px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px darkgrey;
+}
+
+li {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+h2 {
+  height: 70px;
+}
+
+p {
+}
+
+img {
+  height: 250px;
+}
+
+button {
+  cursor: pointer;
+
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+  margin: 10px;
+  color: white;
+  background-color: maroon;
+  box-shadow: 2px 2px 2px white;
+}

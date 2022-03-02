@@ -1,0 +1,15 @@
+<section>
+  <ul>
+    <li *ngFor="let c of category">
+      <a (click)="enterCategory(c.id)">{{ c.name }}</a>
+    </li>
+    <!-- <app-movie *ngFor="let m of movies" [movie]="m"></app-movie> -->
+  </ul>
+  <article>
+    <input #input type="text" placeholder="Sök efter film" />
+    <button (click)="searchForMovie(input.value)">Sök</button>
+  </article>
+  <article>
+    <app-movie *ngFor="let m of moviesdisplayed" [movie]="m"></app-movie>
+  </article>
+</section>

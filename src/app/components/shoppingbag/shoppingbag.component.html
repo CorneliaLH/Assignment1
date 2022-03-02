@@ -1,0 +1,79 @@
+<section>
+  <h2>Varukorgen!</h2>
+  <p *ngIf="movieIdsLSArray.length == 0; else shoppingcart">
+    Du har inga varor i varukorgen, handla vidare!
+  </p>
+  <ng-template #shoppingcart>
+    <article>
+      <p>Varor i varukorgen:</p>
+      <ul *ngFor="let m of movieArray; let i = index">
+        <li>{{ m.name }}</li>
+        <li>{{ m.price }} kr</li>
+        <li>Antal av denna produkt: {{ orderRows[i].amount }}</li>
+        <button (click)="removeItem(i)">Ta bort</button>
+      </ul>
+
+      <p>Total kostnad: {{ totalPrice }} kr</p>
+
+      <h3>Fyll vänligen i användaruppgifter nedan:</h3>
+      <form [formGroup]="userInput" (ngSubmit)="submitOrder()">
+        <label for="text">Förnamn:</label>
+        <input type="text" formControlName="firstname" #firstname />
+        <div
+          *ngIf="
+            userInput.get('firstname')?.invalid &&
+            (userInput.get('firstname')?.touched ||
+              userInput.get('firstname')?.dirty)
+          "
+        >
+          <p *ngIf="userInput.get('firstname')?.errors?.['required']">
+            Detta fält är obligatoriskt!
+          </p>
+          <p *ngIf="userInput.get('firstname')?.errors?.['minlength']">
+            Namn måste innehålla minst tre bokstäver!
+          </p>
+        </div>
+        <label for="text">Efternamn:</label>
+        <input type="text" formControlName="lastname" />
+        <div
+          *ngIf="
+            userInput.get('lastname')?.invalid &&
+            (userInput.get('lastname')?.touched || userInput.get('name')?.dirty)
+          "
+        >
+          <p *ngIf="userInput.get('lastname')?.errors?.['required']">
+            Detta fält är obligatoriskt!
+          </p>
+          <p *ngIf="userInput.get('lastname')?.errors?.['minlength']">
+            Namn måste innehålla minst tre bokstäver!
+          </p>
+        </div>
+        <label for="text">E-mail:</label>
+        <input
+          #email
+          type="text"
+          formControlName="email"
+          [email]="email.value !== ''"
+        />
+        <div
+          *ngIf="
+            userInput.get('email')?.invalid &&
+            (userInput.get('email')?.touched || userInput.get('email')?.dirty)
+          "
+        >
+          <p *ngIf="userInput.get('email')?.errors?.['required']">
+            Detta fält är obligatoriskt!
+          </p>
+
+          <p *ngIf="userInput.get('email')?.errors?.['email']">
+            Måste vara korrekt format ex: xxx@xxx.xxx
+          </p>
+        </div>
+        <button type="submit" [disabled]="!userInput.valid">
+          Skicka beställning
+        </button>
+      </form>
+      <!-- <button ">Skicka beställning</button> -->
+    </article>
+  </ng-template>
+</section>

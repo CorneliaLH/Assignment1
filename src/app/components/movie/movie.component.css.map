@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,CAAC,CAAC;EACA,KAAK,EAAE,IAAI;CACZ;;AAED,AAAA,GAAG,CAAC;EACF,KAAK,EAAE,IAAI;CACZ",
+    "sources": [
+        "movie.component.scss"
+    ],
+    "names": [],
+    "file": "movie.component.css"
+}

@@ -1,0 +1,19 @@
+section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+article {
+  width: 60%;
+}
+
+ul {
+  border: 3px solid wheat;
+  padding: 10px;
+  list-style-type: none;
+}
+li {
+  padding: 5px;
+}
