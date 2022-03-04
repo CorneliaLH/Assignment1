@@ -1,4 +1,3 @@
-import { IUser } from './IUser';
 import { ProductOrder } from './ProductOrder';
 
 export class Order {
@@ -24,7 +23,7 @@ export class Order {
       (this.companyId = 17),
       (this.created = new Date()),
       (this.createdBy = createdBy),
-      (this.paymentMethod = 'Paypal');
+      (this.paymentMethod = paymentMethod);
     (this.totalPrice = totalPrice),
       (this.status = status),
       (this.orderRows = orderRows);

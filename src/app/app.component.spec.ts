@@ -1,17 +1,27 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { DebugElement } from '@angular/core';
 import { AppComponent } from './app.component';
+import { By } from '@angular/platform-browser';
+import { ComponentFixture } from '@angular/core/testing';
+
+// import { By } from '';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let de: DebugElement;
+  let fixture: ComponentFixture<AppComponent>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [RouterTestingModule],
+      declarations: [AppComponent],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    de = fixture.debugElement;
   });
 
   it('should create the app', () => {
@@ -26,10 +36,8 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Assignment1');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Assignment1 app is running!');
+  //Nya test
+  it('should have a logo', () => {
+    expect(de.query(By.css('div')).nativeElement.innerText).toBe('Logo');
   });
 });

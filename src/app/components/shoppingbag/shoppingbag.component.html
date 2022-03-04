@@ -1,19 +1,32 @@
 <section>
   <h2>Varukorgen!</h2>
-  <p *ngIf="movieIdsLSArray.length == 0; else shoppingcart">
+  <p *ngIf="movieIdsLSArray.length === 0; else shoppingcart">
     Du har inga varor i varukorgen, handla vidare!
   </p>
   <ng-template #shoppingcart>
     <article>
       <p>Varor i varukorgen:</p>
-      <ul *ngFor="let m of movieArray; let i = index">
-        <li>{{ m.name }}</li>
-        <li>{{ m.price }} kr</li>
-        <li>Antal av denna produkt: {{ orderRows[i].amount }}</li>
-        <button (click)="removeItem(i)">Ta bort</button>
-      </ul>
+
+      <div *ngFor="let m of movieArray; let i = index">
+        <div *ngIf="orderRows[i].amount !== 0">
+          <ul>
+            <li>{{ m.name }}</li>
+            <li>{{ m.price }} kr</li>
+            <li>Antal av denna produkt: {{ orderRows[i].amount }}</li>
+            <button (click)="removeItem(i)">Ta bort</button>
+          </ul>
+        </div>
+      </div>
 
       <p>Total kostnad: {{ totalPrice }} kr</p>
+
+      <h3>Betalningsmetod:</h3>
+      <select name="selection-payment" [(ngModel)]="valuePayment">
+        <option *ngFor="let pay of payment" [ngValue]="pay">{{ pay }}</option>
+        <!-- <option [value]="2">MasterCard</option>
+        <option [value]="3">American Express</option>
+        <option [value]="4">PayPal</option> -->
+      </select>
 
       <h3>Fyll vänligen i användaruppgifter nedan:</h3>
       <form [formGroup]="userInput" (ngSubmit)="submitOrder()">

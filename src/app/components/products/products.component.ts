@@ -36,6 +36,13 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+
+  allMovies() {
+    this.moviesdisplayed = [];
+    for (let i = 0; i < this.movies.length; i++) {
+      this.moviesdisplayed.push(this.movies[i]);
+    }
+  }
   //Söka efter film och visa resultat, om flera blir de som lista, om endast en
   //visas detaljer direkt
   searchForMovie(input: string) {

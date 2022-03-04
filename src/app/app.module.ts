@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieComponent } from './components/movie/movie.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShoppingbagComponent } from './components/shoppingbag/shoppingbag.component';
+import { FormsModule } from '@angular/forms';
+
+// import { Router } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { ShoppingbagComponent } from './components/shoppingbag/shoppingbag.compo
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
+
+    // Router,
   ],
   providers: [],
   bootstrap: [AppComponent],

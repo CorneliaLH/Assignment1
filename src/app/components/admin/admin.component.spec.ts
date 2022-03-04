@@ -1,4 +1,11 @@
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHandler,
+} from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MovieService } from 'src/app/services/movie.service';
 
 import { AdminComponent } from './admin.component';
 
@@ -8,9 +15,10 @@ describe('AdminComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule],
+      declarations: [AdminComponent],
+      providers: [MovieService, HttpClientModule, HttpClient, HttpHandler],
+    }).compileComponents();
   });
 
   beforeEach(() => {

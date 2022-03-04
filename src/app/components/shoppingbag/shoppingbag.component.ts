@@ -29,6 +29,8 @@ export class ShoppingbagComponent implements OnInit {
   totalPrice: number = 0;
   orderRows: ProductOrder[] = [];
   amount: number = 0;
+  payment = ['Visa', 'MasterCard', 'American Express', 'Paypal'];
+  valuePayment: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +49,7 @@ export class ShoppingbagComponent implements OnInit {
         this.userInput.value.lastname +
         ' Email: ' +
         this.userInput.value.email,
-      'Paypal',
+      this.valuePayment,
       this.totalPrice,
       0,
       this.orderRows
@@ -56,6 +58,7 @@ export class ShoppingbagComponent implements OnInit {
     console.log(order);
     this.orderService.createOrder(order).subscribe((data) => {
       console.log('Order was created successfully!');
+      console.log(data);
     });
     this.movieIdsLSArray = [];
     localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
@@ -72,8 +75,12 @@ export class ShoppingbagComponent implements OnInit {
       );
       this.movieIdsLSArray.splice(index, 1);
       localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
-    } else {
+    } else if (
+      this.movieIdsLSArray.some((id) => id !== this.orderRows[i].productId)
+    ) {
+      console.log(this.movieArray);
       this.movieArray.splice(i, 1);
+      console.log(this.movieArray);
     }
   }
 
@@ -97,6 +104,7 @@ export class ShoppingbagComponent implements OnInit {
                   data[i].productCategory
                 )
               );
+              console.log(this.movieArray);
               this.orderRows.push(
                 new ProductOrder(
                   Number(),
@@ -106,6 +114,7 @@ export class ShoppingbagComponent implements OnInit {
                   Number()
                 )
               );
+              console.log(this.orderRows);
             } else {
               for (let u = 0; u < this.orderRows.length; u++) {
                 if (this.orderRows[u].productId === id) {

@@ -30,7 +30,7 @@ export class OrderService {
       )
       .subscribe(() => this.getOrders());
   }
-  createOrder(createBody: any) {
+  createOrder(createBody: Order) {
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('', 'application/json');
     return this.http.post(
