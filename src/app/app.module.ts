@@ -14,6 +14,7 @@ import { MovieComponent } from './components/movie/movie.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShoppingbagComponent } from './components/shoppingbag/shoppingbag.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // import { Router } from '@angular/router';
 
@@ -34,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
 
     // Router,
   ],

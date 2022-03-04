@@ -5,6 +5,7 @@ import { Movie } from 'src/app/models/Movie';
 import { Order } from 'src/app/models/Order';
 import { MovieService } from 'src/app/services/movie.service';
 import { OrderService } from 'src/app/services/order.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-shoppingbag',
@@ -20,7 +21,7 @@ export class ShoppingbagComponent implements OnInit {
   });
 
   //Array som sparar i localStorage
-  movieIdsLSArray = [];
+  movieIdsLSArray: number[] = [];
 
   //filmArray som printas ut på sidan
   movieArray: Movie[] = [];
@@ -35,7 +36,8 @@ export class ShoppingbagComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: MovieService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private LsService: LocalStorageService
   ) {}
 
   submitOrder() {
@@ -60,33 +62,42 @@ export class ShoppingbagComponent implements OnInit {
       console.log('Order was created successfully!');
       console.log(data);
     });
-    this.movieIdsLSArray = [];
-    localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
+    this.movieIdsLSArray = this.LsService.emptyLocalStorage();
+    // localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
     alert('Din order är skickad!');
   }
   //Ta bort produkt från beställning
   removeItem(i: number) {
     console.log(this.orderRows[i].amount);
-    if (this.orderRows[i].amount >= 1) {
+    if (
+      this.LsService.getItemLS().some(
+        (id) => id === this.orderRows[i].productId
+      )
+    ) {
+      console.log(this.movieArray);
+      this.movieIdsLSArray = this.LsService.getItemLS();
+      this.movieIdsLSArray.splice(i, 1);
+      this.LsService.setItemLS();
+      this.orderRows.splice(i, 1);
+      this.movieArray.splice(i, 1);
+      console.log('I else-satsen' + this.orderRows);
+    } else {
+      console.log('jej');
       this.totalPrice -= this.movieArray[i].price;
       this.orderRows[i].amount--;
       let index = this.movieIdsLSArray.findIndex(
         (id) => id === this.movieArray[i].id
       );
       this.movieIdsLSArray.splice(index, 1);
-      localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
-    } else if (
-      this.movieIdsLSArray.some((id) => id !== this.orderRows[i].productId)
-    ) {
-      console.log(this.movieArray);
-      this.movieArray.splice(i, 1);
-      console.log(this.movieArray);
+      // localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
+      this.LsService.setItemLS();
+      // this.movieArray.some((id) => id.id{
     }
   }
 
   ngOnInit(): void {
-    let movieArray: string = localStorage.getItem('id') || '[]';
-    this.movieIdsLSArray = JSON.parse(movieArray);
+    this.movieIdsLSArray = this.LsService.getItemLS();
+
     this.service.movies$.subscribe((data) => {
       this.movieIdsLSArray.forEach((id) => {
         for (let i = 0; i < data.length; i++) {

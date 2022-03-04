@@ -1,10 +1,24 @@
 section {
   height: 80vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 h1 {
   text-align: center;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+img {
+  width: 40%;
+  box-shadow: 3px 3px 3px black;
+  border-radius: 5px;
 }
