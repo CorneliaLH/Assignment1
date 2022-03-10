@@ -2,11 +2,11 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/models/Product';
 
 @Component({
-  selector: 'app-movie',
-  templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.scss'],
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss'],
 })
-export class MovieComponent implements OnInit {
+export class ProductComponent implements OnInit {
   //skapar varje produkt
   @Input() product: Product = {
     id: 0,

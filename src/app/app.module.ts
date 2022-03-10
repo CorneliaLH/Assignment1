@@ -10,7 +10,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { MovieComponent } from './components/movie/movie.component';
+import { ProductComponent } from './components/product/product.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.co
     DetailsComponent,
     AdminComponent,
     NotFoundComponent,
-    MovieComponent,
+    ProductComponent,
     ShoppingcartComponent,
     DarkenDirective,
   ],

@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Product } from 'src/app/models/Product';
 
-import { MovieComponent } from './movie.component';
+import { ProductComponent } from './product.component';
 
-describe('MovieComponent', () => {
+describe('ProductComponent', () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MovieComponent, TestHostComponent],
+      declarations: [ProductComponent, TestHostComponent],
     }).compileComponents();
   });
 
@@ -30,7 +30,7 @@ describe('MovieComponent', () => {
   });
 });
 @Component({
-  template: `<app-movie [product]="dataToSend"></app-movie>`,
+  template: `<app-product [product]="dataToSend"></app-product>`,
 })
 class TestHostComponent {
   dataToSend: Product = new Product(1, 'Name1', '', 100, '', 1900, []);

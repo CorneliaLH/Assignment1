@@ -14,7 +14,10 @@
     />
   </article>
   <article *ngIf="resultSearch; else noResult">
-    <app-movie *ngFor="let p of productsdisplayed" [product]="p"></app-movie>
+    <app-product
+      *ngFor="let p of productsdisplayed"
+      [product]="p"
+    ></app-product>
   </article>
   <ng-template #noResult>
     <article>
