@@ -28,14 +28,21 @@ export class ProductService implements IProductData {
     });
   }
   getCategories(): void {
-    this.http.get<ICategory[]>(environment.urlCategories).subscribe((data) => {
-      this.category.next(data);
-      console.log(data);
-    });
+    this.http
+      .get<ICategory[]>(
+        'https://medieinstitutet-wie-products.azurewebsites.net/api/categories'
+      )
+      .subscribe((data) => {
+        this.category.next(data);
+        console.log(data);
+      });
   }
   searchForProduct(input: string): Observable<Product[]> {
     return this.http
-      .get<Product[]>(environment.urlSearch + input)
+      .get<Product[]>(
+        'https://medieinstitutet-wie-products.azurewebsites.net/api/search?=' +
+          input
+      )
       .pipe(map((data: Product[]) => data));
   }
 }
