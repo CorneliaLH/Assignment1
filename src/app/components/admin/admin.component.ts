@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/Order';
+import { OrderRows } from 'src/app/models/OrderRows';
 import { Product } from 'src/app/models/Product';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -12,6 +13,8 @@ import { ProductService } from 'src/app/services/product.service';
 export class AdminComponent implements OnInit {
   myCompanyOrders: Order[] = [];
   productList: Product[] = [];
+  orderRowAmount: number = 0;
+  totalAmount: number[] = [];
   // productName: string[] = [];
 
   constructor(
@@ -40,6 +43,15 @@ export class AdminComponent implements OnInit {
     //Listan med orders hämtas från service
     this.orderService.product$.subscribe((data: Order[]) => {
       this.myCompanyOrders = data;
+      //loop för att skapa totala antalet produkter
+      this.myCompanyOrders.forEach((order) => {
+        this.orderRowAmount = 0;
+        order.orderRows.forEach((orderRow) => {
+          this.orderRowAmount += orderRow.amount;
+        });
+
+        this.totalAmount.push(this.orderRowAmount);
+      });
     });
     this.orderService.getOrders();
   }
