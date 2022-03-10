@@ -12,11 +12,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieComponent } from './components/movie/movie.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ShoppingbagComponent } from './components/shoppingbag/shoppingbag.component';
+
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-// import { Router } from '@angular/router';
+import { DarkenDirective } from './directives/darken.directive';
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminComponent,
     NotFoundComponent,
     MovieComponent,
-    ShoppingbagComponent,
+    ShoppingcartComponent,
+    DarkenDirective,
   ],
   imports: [
     BrowserModule,
@@ -36,8 +37,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-
-    // Router,
   ],
   providers: [],
   bootstrap: [AppComponent],

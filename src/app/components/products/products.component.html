@@ -1,16 +1,24 @@
 <section>
   <ul>
-    <li><a (click)="allMovies()" class="allMovies">Alla Filmer</a></li>
+    <li><a (click)="allProducts()" class="allProducts">Alla Filmer</a></li>
     <li *ngFor="let c of category">
       <a (click)="enterCategory(c.id)">{{ c.name }}</a>
     </li>
-    <!-- <app-movie *ngFor="let m of movies" [movie]="m"></app-movie> -->
   </ul>
   <article>
-    <input #input type="text" placeholder="Sök efter film" />
-    <button (click)="searchForMovie(input.value)">Sök</button>
+    <input
+      #inputSearch
+      (input)="search(inputSearch.value)"
+      type="text"
+      placeholder="Sök efter film"
+    />
   </article>
-  <article>
-    <app-movie *ngFor="let m of moviesdisplayed" [movie]="m"></app-movie>
+  <article *ngIf="resultSearch; else noResult">
+    <app-movie *ngFor="let p of productsdisplayed" [product]="p"></app-movie>
   </article>
+  <ng-template #noResult>
+    <article>
+      <p>Produkten du sökte efter fanns inte, försök igen.</p>
+    </article>
+  </ng-template>
 </section>

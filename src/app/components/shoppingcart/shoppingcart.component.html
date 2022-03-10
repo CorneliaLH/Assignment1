@@ -1,13 +1,16 @@
 <section>
   <h2>Varukorgen!</h2>
-  <p *ngIf="movieIdsLSArray.length === 0; else shoppingcart">
+  <p *ngIf="productIdsLSArray.length === 0; else shoppingcart">
     Du har inga varor i varukorgen, handla vidare!
   </p>
   <ng-template #shoppingcart>
     <article>
       <p>Varor i varukorgen:</p>
 
-      <div *ngFor="let m of movieArray; let i = index">
+      <div
+        *ngFor="let m of productArray; let i = index"
+        [appDarken]="animationSpeed"
+      >
         <div *ngIf="orderRows[i].amount !== 0">
           <ul>
             <li>{{ m.name }}</li>

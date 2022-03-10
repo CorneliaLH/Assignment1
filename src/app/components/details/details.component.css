@@ -21,9 +21,18 @@ ul {
 
 img {
   width: 20%;
+  -webkit-box-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;
+          box-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;
 }
 
 button {
+  cursor: pointer;
   margin-top: 20px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+  color: white;
+  background-color: maroon;
+  -webkit-box-shadow: 2px 2px 2px white;
+          box-shadow: 2px 2px 2px white;
 }
 /*# sourceMappingURL=details.component.css.map */

@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from 'src/app/models/Movie';
-import { MovieService } from 'src/app/services/movie.service';
+import { Product } from 'src/app/models/Product';
+import { ProductService } from 'src/app/services/product.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
+  //Animation för att presentera produkter
   animations: [
     trigger('enterAnimation', [
       transition('void => *', [
-        style({ opacity: 0 }), //style only for transition transition (after transiton it removes)
-        animate(1000, style({ opacity: 1 })), // the new state of the transition(after transiton it removes)
+        style({ opacity: 0 }),
+        animate(1000, style({ opacity: 1 })),
       ]),
-      transition('* => void', [
-        animate(1000, style({ opacity: 0 })), // the new state of the transition(after transiton it removes)
-      ]),
+      transition('* => void', [animate(1000, style({ opacity: 0 }))]),
     ]),
   ],
   templateUrl: './home.component.html',
@@ -22,15 +21,17 @@ import { trigger, style, animate, transition } from '@angular/animations';
 export class HomeComponent implements OnInit {
   movieURL: string =
     'https://images-na.ssl-images-amazon.com/images/M/MV5BMTYxNDA3MDQwNl5BMl5BanBnXkFtZTcwNTU4Mzc1Nw@@._V1_SY1000_CR0,0,674,1000_AL_.jpg';
-  movies: Movie[] = [];
-  fade: string = 'is-loaded';
+  movies: Product[] = [];
   toggle: boolean = true;
-  constructor(private service: MovieService) {}
+
+  constructor(private productservice: ProductService) {}
   toggleElement() {
     this.toggle = !this.toggle;
   }
+
   ngOnInit(): void {
-    this.service.movies$.subscribe((data) => {
+    //hämtar produkter och url till img byts ut med intervall om 2 s
+    this.productservice.products$.subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
         let movie = data[i].imageUrl;
         setTimeout(() => {
@@ -39,6 +40,6 @@ export class HomeComponent implements OnInit {
         }, 2000 * (i + 1));
       }
     });
-    this.service.getMovies();
+    this.productservice.getProducts();
   }
 }

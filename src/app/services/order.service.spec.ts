@@ -4,7 +4,7 @@ import {
   HttpHandler,
 } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { MovieService } from './movie.service';
+import { ProductService } from './product.service';
 import { OrderService } from './order.service';
 
 describe('OrderService', () => {
@@ -12,7 +12,7 @@ describe('OrderService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MovieService, HttpClientModule, HttpClient, HttpHandler],
+      providers: [ProductService, HttpClientModule, HttpClient, HttpHandler],
     });
     service = TestBed.inject(OrderService);
   });

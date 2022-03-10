@@ -1,8 +1,7 @@
-<ul>
+<ul [appDarken]="animationSpeed">
   <li>
-    <!-- <h2>{{ movie.name }}</h2> -->
-    <img [src]="movie.imageUrl" alt="Bild på {{ movie.name }}" />
-    <p>{{ movie.price }} kronor</p>
-    <button [routerLink]="['/products', movie.id]">Mer om filmen</button>
+    <img [src]="product.imageUrl" alt="Bild på {{ product.name }}" />
+    <p>{{ product.price }} kronor</p>
+    <button [routerLink]="['/products', product.id]">Mer om filmen</button>
   </li>
 </ul>

@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MovieService } from 'src/app/services/movie.service';
+import { ProductService } from 'src/app/services/product.service';
 
 import { AdminComponent } from './admin.component';
 
@@ -17,7 +17,7 @@ describe('AdminComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AdminComponent],
-      providers: [MovieService, HttpClientModule, HttpClient, HttpHandler],
+      providers: [ProductService, HttpClientModule, HttpClient, HttpHandler],
     }).compileComponents();
   });
 

@@ -6,15 +6,22 @@ section {
   align-items: center;
 }
 
-ul {
+p {
   width: 60%;
 }
 
+.price {
+  text-align: center;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px darkblue;
+}
 img {
   width: 20%;
+  box-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;
 }
 
 button {
+  cursor: pointer;
   margin-top: 20px;
   padding: 5px 10px 5px 10px;
   border-radius: 3px;

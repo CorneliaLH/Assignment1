@@ -1,7 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { IProductCategory } from 'src/app/models/IProductCategory';
-import { Movie } from 'src/app/models/Movie';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { Product } from 'src/app/models/Product';
 
 @Component({
   selector: 'app-movie',
@@ -9,8 +7,8 @@ import { Movie } from 'src/app/models/Movie';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
-  // movieId = 0;
-  @Input() movie: Movie = {
+  //skapar varje produkt
+  @Input() product: Product = {
     id: 0,
     name: '',
     description: '',
@@ -19,14 +17,8 @@ export class MovieComponent implements OnInit {
     year: 0,
     productCategory: [{ categoryId: 0, category: null }],
   };
-
+  @Output() animationSpeed: number = 1;
   constructor() {}
-
-  // extendedInfoMovie(movieId: number) {
-  //   console.log(movieId);
-  //   this.movieId = movieId;
-  // this.route.params.pipe();
-  // }
 
   ngOnInit(): void {}
 }

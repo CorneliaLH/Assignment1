@@ -1,18 +1,18 @@
-import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Output } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ProductOrder } from 'src/app/models/ProductOrder';
-import { Movie } from 'src/app/models/Movie';
+import { Product } from 'src/app/models/Product';
 import { Order } from 'src/app/models/Order';
-import { MovieService } from 'src/app/services/movie.service';
+import { ProductService } from 'src/app/services/product.service';
 import { OrderService } from 'src/app/services/order.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
-  selector: 'app-shoppingbag',
-  templateUrl: './shoppingbag.component.html',
-  styleUrls: ['./shoppingbag.component.scss'],
+  selector: 'app-shoppingcart',
+  templateUrl: './shoppingcart.component.html',
+  styleUrls: ['./shoppingcart.component.scss'],
 })
-export class ShoppingbagComponent implements OnInit {
+export class ShoppingcartComponent implements OnInit {
   //Formvariabler
   userInput = this.fb.group({
     firstname: ['', [Validators.required, Validators.minLength(1)]],
@@ -21,10 +21,10 @@ export class ShoppingbagComponent implements OnInit {
   });
 
   //Array som sparar i localStorage
-  movieIdsLSArray: number[] = [];
+  productIdsLSArray: number[] = [];
 
-  //filmArray som printas ut på sidan
-  movieArray: Movie[] = [];
+  //FilmArray som printas ut på sidan
+  productArray: Product[] = [];
 
   //Ordervariabler
   totalPrice: number = 0;
@@ -33,13 +33,15 @@ export class ShoppingbagComponent implements OnInit {
   payment = ['Visa', 'MasterCard', 'American Express', 'Paypal'];
   valuePayment: string = '';
 
+  @Output() animationSpeed: number = 1;
   constructor(
     private fb: FormBuilder,
-    private service: MovieService,
+    private productservice: ProductService,
     private orderService: OrderService,
     private LsService: LocalStorageService
   ) {}
 
+  //skicka order
   submitOrder() {
     let order: Order = new Order(
       Number(),
@@ -56,17 +58,13 @@ export class ShoppingbagComponent implements OnInit {
       0,
       this.orderRows
     );
-
-    console.log(order);
     this.orderService.createOrder(order).subscribe((data) => {
       console.log('Order was created successfully!');
-      console.log(data);
     });
-    this.movieIdsLSArray = this.LsService.emptyLocalStorage();
-    // localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
+    this.productIdsLSArray = this.LsService.emptyLocalStorage();
     alert('Din order är skickad!');
   }
-  //Ta bort produkt från beställning
+  //Ta bort produkt från beställning innan order skickas
   removeItem(i: number) {
     console.log(this.orderRows[i].amount);
     if (
@@ -74,38 +72,35 @@ export class ShoppingbagComponent implements OnInit {
         (id) => id === this.orderRows[i].productId
       )
     ) {
-      console.log(this.movieArray);
-      this.movieIdsLSArray = this.LsService.getItemLS();
-      this.movieIdsLSArray.splice(i, 1);
+      this.productIdsLSArray = this.LsService.getItemLS();
+      this.productIdsLSArray.splice(i, 1);
       this.LsService.setItemLS();
       this.orderRows.splice(i, 1);
-      this.movieArray.splice(i, 1);
-      console.log('I else-satsen' + this.orderRows);
+      this.productArray.splice(i, 1);
     } else {
-      console.log('jej');
-      this.totalPrice -= this.movieArray[i].price;
+      this.totalPrice -= this.productArray[i].price;
       this.orderRows[i].amount--;
-      let index = this.movieIdsLSArray.findIndex(
-        (id) => id === this.movieArray[i].id
+      let index = this.productIdsLSArray.findIndex(
+        (id) => id === this.productArray[i].id
       );
-      this.movieIdsLSArray.splice(index, 1);
-      // localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
+      this.productIdsLSArray.splice(index, 1);
       this.LsService.setItemLS();
-      // this.movieArray.some((id) => id.id{
     }
   }
 
   ngOnInit(): void {
-    this.movieIdsLSArray = this.LsService.getItemLS();
+    //skapa varukorgen från LocalStorage
+    //if-sats för att undvika att presentera dubletter, istället ökar amount(antal)
+    this.productIdsLSArray = this.LsService.getItemLS();
 
-    this.service.movies$.subscribe((data) => {
-      this.movieIdsLSArray.forEach((id) => {
+    this.productservice.products$.subscribe((data) => {
+      this.productIdsLSArray.forEach((id) => {
         for (let i = 0; i < data.length; i++) {
           if (data[i].id === id) {
-            if (!this.movieArray.some((movie) => movie.id === id)) {
+            if (!this.productArray.some((movie) => movie.id === id)) {
               this.amount = 1;
-              this.movieArray.push(
-                new Movie(
+              this.productArray.push(
+                new Product(
                   data[i].id,
                   data[i].name,
                   data[i].description,
@@ -115,7 +110,7 @@ export class ShoppingbagComponent implements OnInit {
                   data[i].productCategory
                 )
               );
-              console.log(this.movieArray);
+              console.log(this.productArray);
               this.orderRows.push(
                 new ProductOrder(
                   Number(),
@@ -141,6 +136,6 @@ export class ShoppingbagComponent implements OnInit {
         }
       });
     });
-    this.service.getMovies();
+    this.productservice.getProducts();
   }
 }

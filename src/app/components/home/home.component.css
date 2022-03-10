@@ -3,6 +3,10 @@ section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -13,5 +17,31 @@ section {
 
 h1 {
   text-align: center;
+}
+
+div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50%;
+  height: 60vh;
+  border: 2px solid lightblue;
+  padding: 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 4px 4px 4px darkgrey;
+          box-shadow: 4px 4px 4px darkgrey;
+}
+
+img {
+  width: 40%;
+  -webkit-box-shadow: 3px 3px 3px black;
+          box-shadow: 3px 3px 3px black;
+  border-radius: 5px;
 }
 /*# sourceMappingURL=home.component.css.map */

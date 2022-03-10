@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Movie } from 'src/app/models/Movie';
+import { Product } from 'src/app/models/Product';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { MovieService } from 'src/app/services/movie.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-details',
@@ -11,45 +11,36 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class DetailsComponent implements OnInit {
   productId: number = 0;
-  movie: Movie = new Movie(0, '', '', 0, '', 0, []);
-  moviesArray: Movie[] = [];
-  // movieIdsLSArray: number[] = [];
+  product: Product = new Product(0, '', '', 0, '', 0, []);
+  productsArray: Product[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private service: MovieService,
+    private productservice: ProductService,
     private serviceLS: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    //hämtar id från url
     this.route.params.subscribe((p) => {
       this.productId = +p['id'];
     });
-    console.log(this.productId);
 
-    this.service.movies$.subscribe((data) => {
+    //hämtar produkt efter id
+    this.productservice.products$.subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
         if (data[i].id === this.productId) {
-          this.movie = data[i];
-          console.log(this.movie);
+          this.product = data[i];
         }
       }
     });
 
-    this.service.getMovies();
+    this.productservice.getProducts();
   }
-  putItemInBag(movieId: number) {
-    // this.saveToLs(movieId);
-    this.serviceLS.saveToLocalStorage(movieId);
+
+  //sparar vald produkt i LocalStorage
+  putItemInCart(productId: number) {
+    this.serviceLS.saveToLocalStorage(productId);
     alert('Produkt tillagd i varukorgen');
-
-    // localStorage.setItem('id', movieId.toString());
   }
-
-  // saveToLs(movieId: number) {
-  //   let movieArray: string = localStorage.getItem('id') || '[]';
-  //   this.movieIdsLSArray = JSON.parse(movieArray);
-  //   this.movieIdsLSArray.push(movieId);
-  //   localStorage.setItem('id', JSON.stringify(this.movieIdsLSArray));
-  // }
 }

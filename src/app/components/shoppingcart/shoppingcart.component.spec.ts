@@ -5,19 +5,19 @@ import {
 } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { MovieService } from 'src/app/services/movie.service';
-import { ShoppingbagComponent } from './shoppingbag.component';
+import { ProductService } from 'src/app/services/product.service';
+import { ShoppingcartComponent } from './shoppingcart.component';
 
-describe('ShoppingbagComponent', () => {
-  let component: ShoppingbagComponent;
-  let fixture: ComponentFixture<ShoppingbagComponent>;
+describe('ShoppingcartComponent', () => {
+  let component: ShoppingcartComponent;
+  let fixture: ComponentFixture<ShoppingcartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ShoppingbagComponent],
+      declarations: [ShoppingcartComponent],
       providers: [
         FormBuilder,
-        MovieService,
+        ProductService,
         HttpClientModule,
         HttpClient,
         HttpHandler,
@@ -26,7 +26,7 @@ describe('ShoppingbagComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShoppingbagComponent);
+    fixture = TestBed.createComponent(ShoppingcartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

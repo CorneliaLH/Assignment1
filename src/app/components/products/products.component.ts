@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICategory } from 'src/app/models/ICategory';
-// import { IProductCategory } from 'src/app/models/IProductCategory';
-import { Movie } from 'src/app/models/Movie';
-import { MovieService } from 'src/app/services/movie.service';
+
+import { Product } from 'src/app/models/Product';
+import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  Observable,
+  Subject,
+  switchMap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -12,65 +20,83 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  movies: Movie[] = [];
+  products: Product[] = [];
   category: ICategory[] = [];
-  moviesdisplayed: Movie[] = [];
-  searchMovie: Movie[] = [];
-  // productCategory: IProductCategory[] = [];
+  productsdisplayed: Product[] = [];
+  searchProduct: Product[] = [];
+  searchTerm = new Subject<string>();
+  searchProducts: Observable<Product[]> = new Observable();
+  resultSearch: boolean = true;
+  searchList: Product[] = [];
 
   constructor(
-    private service: MovieService,
+    private productservice: ProductService,
     public router: Router,
     public route: ActivatedRoute
   ) {}
 
+  //Funktion för att presentera alla produkter
+
+  allProducts() {
+    this.productsdisplayed = [];
+    for (let i = 0; i < this.products.length; i++) {
+      this.productsdisplayed.push(this.products[i]);
+    }
+  }
+
   //Funktion för att välja filmer efter kategori
 
   enterCategory(id: number) {
-    this.moviesdisplayed = [];
-    this.movies.forEach((movie) => {
+    this.productsdisplayed = [];
+    this.products.forEach((movie) => {
       for (let i = 0; i < movie.productCategory.length; i++) {
         if (movie.productCategory[i].categoryId === id) {
-          this.moviesdisplayed.push(movie);
+          this.productsdisplayed.push(movie);
         }
       }
     });
   }
 
-  allMovies() {
-    this.moviesdisplayed = [];
-    for (let i = 0; i < this.movies.length; i++) {
-      this.moviesdisplayed.push(this.movies[i]);
-    }
-  }
-  //Söka efter film och visa resultat, om flera blir de som lista, om endast en
-  //visas detaljer direkt
-  searchForMovie(input: string) {
-    this.service.searchMovies$.subscribe((data: Movie[]) => {
-      if (data.length === 0) {
-        this.router.navigate(['**']);
-      } else if (data.length === 1) {
-        this.searchMovie = data;
-        this.searchMovie.forEach((movie) => {
-          this.router.navigate(['/products', movie.id]);
-        });
-      } else {
-        this.moviesdisplayed = data;
-      }
-    });
-    this.service.searchForMovies(input);
-  }
-
   //hämtar kategorier och filmer från service
   ngOnInit(): void {
-    this.service.movies$.subscribe((data: Movie[]) => {
-      this.movies = data;
+    this.productservice.products$.subscribe((data: Product[]) => {
+      this.products = data;
     });
 
-    this.service.categories$.subscribe((data: ICategory[]) => {
+    this.productservice.categories$.subscribe((data: ICategory[]) => {
       this.category = data;
     });
-    this.service.getCategories();
-    this.service.getMovies();
+    this.productservice.getCategories();
+    this.productservice.getProducts();
+
+    //
+    this.searchProducts = this.searchTerm.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      filter((searchTermFromUser: string) => searchTermFromUser.length > 1),
+      switchMap((searchTermFromUser) =>
+        this.productservice.searchForProduct(searchTermFromUser)
+      )
+    );
+
+    this.searchProducts.subscribe((products) => {
+      this.searchList = products;
+      if (this.searchList.length === 0 || null || undefined) {
+        this.resultSearch = false;
+      } else if (this.searchList.length === 1) {
+        this.resultSearch = true;
+        this.searchProduct = products;
+        this.searchProduct.forEach((product) => {
+          this.router.navigate(['/products', product.id]);
+        });
+      } else if (this.searchList.length > 1) {
+        this.resultSearch = true;
+        this.productsdisplayed = products;
+      }
+    });
+  }
+
+  search(inputSearchValue: string) {
+    this.searchTerm.next(inputSearchValue);
   }
 }

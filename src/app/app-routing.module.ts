@@ -5,13 +5,13 @@ import { DetailsComponent } from './components/details/details.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProductsComponent } from './components/products/products.component';
-import { ShoppingbagComponent } from './components/shoppingbag/shoppingbag.component';
+import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/:id', component: DetailsComponent },
-  { path: 'bag', component: ShoppingbagComponent },
+  { path: 'cart', component: ShoppingcartComponent },
   { path: 'admin', component: AdminComponent },
   { path: '**', component: NotFoundComponent },
 ];

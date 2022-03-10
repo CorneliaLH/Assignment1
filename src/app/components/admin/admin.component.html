@@ -1,11 +1,15 @@
 <section>
   <article>
     <h2>Webshoppens ordrar:</h2>
-    <ul *ngFor="let o of myCompanyOrders">
+    <ul *ngFor="let o of myCompanyOrders; let i = index">
       <li>Skapad av: {{ o.createdBy }}</li>
       <li>Id: {{ o.id }}</li>
       <li>Datum: {{ o.created }}</li>
       <li>Price: {{ o.totalPrice }}</li>
+      <h3>Produkter i ordern:</h3>
+      <!-- <li *ngFor="let u of productName"> -->
+      <!-- <p>{{ u }}</p> -->
+      <!-- </li> -->
       <button (click)="deleteOrders(o.id)">Delete order</button>
     </ul>
   </article>

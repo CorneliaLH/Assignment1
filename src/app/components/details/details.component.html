@@ -1,9 +1,7 @@
 <section>
-  <h3>{{ movie.name }}</h3>
-  <ul>
-    <li>Handling: {{ movie.description }}</li>
-    <li>Pris: {{ movie.price }} kronor</li>
-  </ul>
-  <img [src]="movie.imageUrl" alt="movie.name bild" />
-  <button (click)="putItemInBag(movie.id)">Lägg i varukorg</button>
+  <h3>{{ product.name }}</h3>
+  <p>Handling: {{ product.description }}</p>
+  <img [src]="product.imageUrl" alt='product.name + "bild"' />
+  <p class="price">Pris: {{ product.price }} kronor</p>
+  <button (click)="putItemInCart(product.id)">Lägg i varukorg</button>
 </section>

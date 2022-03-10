@@ -4,18 +4,18 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { MovieService } from './movie.service';
+import { ProductService } from './product.service';
 
-describe('MovieseService', () => {
-  let service: MovieService;
+describe('ProductService', () => {
+  let service: ProductService;
   HttpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [MovieService],
+      providers: [ProductService],
     });
-    service = TestBed.inject(MovieService);
+    service = TestBed.inject(ProductService);
   });
 
   // it('should retrieve all movies', () => {
