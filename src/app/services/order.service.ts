@@ -18,10 +18,7 @@ export class OrderService {
 
   getOrders() {
     this.http
-      .get<Order[]>(
-        'https://medieinstitutet-wie-products.azurewebsites.net/api/orders/' +
-          '?companyId=17'
-      )
+      .get<Order[]>(environment.urlOrder + '?companyId=17')
       .subscribe((data: Order[]) => {
         this.product.next(data);
       });
@@ -29,11 +26,7 @@ export class OrderService {
 
   deleteOrders(id: number) {
     this.http
-      .delete(
-        'https://medieinstitutet-wie-products.azurewebsites.net/api/orders/' +
-          id +
-          '?companyId=17'
-      )
+      .delete(environment.urlOrder + id + '?companyId=17')
       .subscribe(() => this.getOrders());
   }
   createOrder(createBody: Order) {
@@ -42,7 +35,7 @@ export class OrderService {
 
     return this.http
       .post(
-        'https://medieinstitutet-wie-products.azurewebsites.net/api/orders/',
+        environment.urlOrder,
         createBody,
 
         { headers: httpHeaders }
