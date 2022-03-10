@@ -1,4 +1,4 @@
-export class ProductOrder {
+export class OrderRows {
   id: number;
   productId: number;
   product: null;

@@ -1,4 +1,4 @@
-import { ProductOrder } from './ProductOrder';
+import { OrderRows } from './OrderRows';
 
 export class Order {
   id: number;
@@ -8,7 +8,7 @@ export class Order {
   paymentMethod: string;
   totalPrice: number;
   status: number;
-  orderRows: ProductOrder[];
+  orderRows: OrderRows[];
   constructor(
     id: number,
     companyID: 17,
@@ -17,7 +17,7 @@ export class Order {
     paymentMethod: string,
     totalPrice: number,
     status: number,
-    orderRows: ProductOrder[]
+    orderRows: OrderRows[]
   ) {
     (this.id = id),
       (this.companyId = 17),

@@ -1,6 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order } from '../models/Order';
 
@@ -28,11 +32,18 @@ export class OrderService {
   createOrder(createBody: Order) {
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('', 'application/json');
-    return this.http.post(
-      environment.urlOrder,
-      createBody,
 
-      { headers: httpHeaders }
-    );
+    return this.http
+      .post(
+        environment.urlOrder,
+        createBody,
+
+        { headers: httpHeaders }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  handleError(error: HttpErrorResponse) {
+    alert('Error: Order inte skickad, försök igen!');
+    return throwError(error);
   }
 }

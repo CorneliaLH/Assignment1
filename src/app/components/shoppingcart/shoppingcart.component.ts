@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ProductOrder } from 'src/app/models/ProductOrder';
+import { OrderRows } from 'src/app/models/OrderRows';
 import { Product } from 'src/app/models/Product';
 import { Order } from 'src/app/models/Order';
 import { ProductService } from 'src/app/services/product.service';
@@ -28,7 +28,7 @@ export class ShoppingcartComponent implements OnInit {
 
   //Ordervariabler
   totalPrice: number = 0;
-  orderRows: ProductOrder[] = [];
+  orderRows: OrderRows[] = [];
   amount: number = 0;
   payment = ['Visa', 'MasterCard', 'American Express', 'Paypal'];
   valuePayment: string = '';
@@ -59,10 +59,12 @@ export class ShoppingcartComponent implements OnInit {
       this.orderRows
     );
     this.orderService.createOrder(order).subscribe((data) => {
-      console.log('Order was created successfully!');
+      if (data) {
+        console.log('Order was created successfully!');
+        alert('Din order är skickad!');
+        this.productIdsLSArray = this.LsService.emptyLocalStorage();
+      }
     });
-    this.productIdsLSArray = this.LsService.emptyLocalStorage();
-    alert('Din order är skickad!');
   }
   //Ta bort produkt från beställning innan order skickas
   removeItem(i: number) {
@@ -112,7 +114,7 @@ export class ShoppingcartComponent implements OnInit {
               );
               console.log(this.productArray);
               this.orderRows.push(
-                new ProductOrder(
+                new OrderRows(
                   Number(),
                   data[i].id,
                   null,
