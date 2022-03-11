@@ -21,25 +21,29 @@ export class CheckoutComponent implements OnInit {
     private router: Router
   ) {}
   submitOrder() {
-    let order: Order = new Order(
-      Number(),
-      17,
-      new Date(),
-      this.order.createdBy,
-      this.order.paymentMethod,
-      this.order.totalPrice,
-      0,
-      this.order.orderRows
-    );
-
-    this.orderService.createOrder(order).subscribe((data) => {
-      if (data) {
-        console.log('Order was created successfully!');
-        alert('Din order är skickad!');
-        this.productIdsLSArray = this.LsService.emptyLocalStorage();
-        this.router.navigate(['']);
-      }
-    });
+    if (this.order.totalPrice == undefined) {
+      alert('Checkout är tom');
+      this.router.navigate(['']);
+    } else {
+      let order: Order = new Order(
+        Number(),
+        17,
+        new Date(),
+        this.order.createdBy,
+        this.order.paymentMethod,
+        this.order.totalPrice,
+        0,
+        this.order.orderRows
+      );
+      this.orderService.createOrder(order).subscribe((data) => {
+        if (data) {
+          console.log('Order was created successfully!');
+          alert('Din order är skickad!');
+          this.productIdsLSArray = this.LsService.emptyLocalStorage();
+          this.router.navigate(['']);
+        }
+      });
+    }
   }
   changeOrder() {
     this.LsService.removeCheckout();

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/Product';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ProductService } from 'src/app/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -17,8 +18,19 @@ export class DetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productservice: ProductService,
-    private serviceLS: LocalStorageService
+    private serviceLS: LocalStorageService,
+    private router: Router
   ) {}
+
+  navigateToProducts() {
+    this.router.navigate(['/products']);
+  }
+
+  //sparar vald produkt i LocalStorage
+  putItemInCart(productId: number) {
+    this.serviceLS.saveToLocalStorage(productId);
+    alert('Produkt tillagd i varukorgen');
+  }
 
   ngOnInit(): void {
     //hämtar id från url
@@ -36,11 +48,5 @@ export class DetailsComponent implements OnInit {
     });
 
     this.productservice.getProducts();
-  }
-
-  //sparar vald produkt i LocalStorage
-  putItemInCart(productId: number) {
-    this.serviceLS.saveToLocalStorage(productId);
-    alert('Produkt tillagd i varukorgen');
   }
 }

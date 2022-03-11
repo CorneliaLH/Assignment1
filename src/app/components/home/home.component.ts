@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/Product';
 import { ProductService } from 'src/app/services/product.service';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -24,11 +25,13 @@ export class HomeComponent implements OnInit {
   movies: Product[] = [];
   toggle: boolean = true;
 
-  constructor(private productservice: ProductService) {}
+  constructor(private productservice: ProductService, private router: Router) {}
   toggleElement() {
     this.toggle = !this.toggle;
   }
-
+  navigateToProducts() {
+    this.router.navigate(['/products']);
+  }
   ngOnInit(): void {
     //hämtar produkter och url till img byts ut med intervall om 2 s
     this.productservice.products$.subscribe((data) => {

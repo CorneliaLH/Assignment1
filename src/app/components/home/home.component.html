@@ -1,6 +1,11 @@
 <section>
   <h1>Välkommen till min web-shop!!</h1>
   <div>
-    <img *ngIf="toggle" [src]="movieURL" [@enterAnimation] />
+    <img
+      *ngIf="toggle"
+      [src]="movieURL"
+      [@enterAnimation]
+      (click)="navigateToProducts()"
+    />
   </div>
 </section>

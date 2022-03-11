@@ -4,4 +4,7 @@
   <img [src]="product.imageUrl" alt='product.name + "bild"' />
   <p class="price">Pris: {{ product.price }} kronor</p>
   <button (click)="putItemInCart(product.id)">Lägg i varukorg</button>
+  <button (click)="navigateToProducts()" class="navigate">
+    Tillbaka till produkter ↩
+  </button>
 </section>

@@ -41,4 +41,8 @@ button {
   -webkit-box-shadow: 2px 2px 2px white;
           box-shadow: 2px 2px 2px white;
 }
+
+.navigate {
+  background-color: black;
+}
 /*# sourceMappingURL=details.component.css.map */
