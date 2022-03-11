@@ -1,0 +1,20 @@
+<section>
+  <article>
+    <h3>Checkout:</h3>
+    <p>Kontrollera din order och skicka sedan in.</p>
+    <ul>
+      <li>Order:</li>
+      <li>Info om beställare: {{ order.createdBy }}</li>
+      <li>Betalningsmetod: {{ order.paymentMethod }}</li>
+
+      <div *ngFor="let p of productNameArray; let i = index">
+        <h4 class="produkter">Produkter:</h4>
+        <p>{{ p.name }}</p>
+        <p>Antal: {{ order.orderRows[i].amount }}</p>
+      </div>
+      <li class="price">Totalt pris: {{ order.totalPrice }} kronor</li>
+    </ul>
+    <button (click)="submitOrder()">Skicka order</button>
+    <button (click)="changeOrder()">Ändra ordern</button>
+  </article>
+</section>

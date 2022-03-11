@@ -6,7 +6,8 @@ import { Order } from 'src/app/models/Order';
 import { ProductService } from 'src/app/services/product.service';
 import { OrderService } from 'src/app/services/order.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
@@ -38,11 +39,12 @@ export class ShoppingcartComponent implements OnInit {
     private fb: FormBuilder,
     private productservice: ProductService,
     private orderService: OrderService,
-    private LsService: LocalStorageService
+    private LsService: LocalStorageService,
+    private router: Router
   ) {}
 
-  //skicka order
-  submitOrder() {
+  //skicka ordder til checkout
+  sendOrderToCheckout() {
     let order: Order = new Order(
       Number(),
       17,
@@ -58,34 +60,29 @@ export class ShoppingcartComponent implements OnInit {
       0,
       this.orderRows
     );
-    this.orderService.createOrder(order).subscribe((data) => {
-      if (data) {
-        console.log('Order was created successfully!');
-        alert('Din order är skickad!');
-        this.productIdsLSArray = this.LsService.emptyLocalStorage();
-      }
-    });
+    this.router.navigate(['/checkout']);
+
+    this.LsService.orderToCheckout(order, this.productArray);
   }
   //Ta bort produkt från beställning innan order skickas
   removeItem(i: number) {
-    console.log(this.orderRows[i].amount);
     if (
-      this.LsService.getItemLS().some(
+      !this.LsService.getItemLS().some(
         (id) => id === this.orderRows[i].productId
       )
     ) {
+      console.log('hej');
       this.productIdsLSArray = this.LsService.getItemLS();
       this.productIdsLSArray.splice(i, 1);
       this.LsService.setItemLS();
       this.orderRows.splice(i, 1);
       this.productArray.splice(i, 1);
     } else {
+      console.log('hå');
       this.totalPrice -= this.productArray[i].price;
       this.orderRows[i].amount--;
-      let index = this.productIdsLSArray.findIndex(
-        (id) => id === this.productArray[i].id
-      );
-      this.productIdsLSArray.splice(index, 1);
+      this.productIdsLSArray = this.LsService.getItemLS();
+      this.productIdsLSArray.splice(i, 1);
       this.LsService.setItemLS();
     }
   }
@@ -112,7 +109,7 @@ export class ShoppingcartComponent implements OnInit {
                   data[i].productCategory
                 )
               );
-              console.log(this.productArray);
+
               this.orderRows.push(
                 new OrderRows(
                   Number(),
@@ -122,13 +119,11 @@ export class ShoppingcartComponent implements OnInit {
                   Number()
                 )
               );
-              console.log(this.orderRows);
             } else {
               for (let u = 0; u < this.orderRows.length; u++) {
                 if (this.orderRows[u].productId === id) {
                   this.orderRows[u].amount++;
                   this.totalPrice += data[i].price;
-                  console.log(this.orderRows[u].amount);
                   return;
                 }
               }

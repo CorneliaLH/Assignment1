@@ -1,0 +1,59 @@
+section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  border: 3px solid purple;
+  padding: 10px;
+  list-style-type: none;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;
+          box-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;
+}
+
+li {
+  margin: 10px;
+}
+
+p {
+  margin: 10px;
+}
+
+.produkter {
+  color: white;
+  text-shadow: 2px 2px 2px maroon;
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 0;
+}
+
+.price {
+  color: white;
+  text-shadow: 2px 2px 2px maroon;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+button {
+  cursor: pointer;
+  margin-top: 20px;
+  margin-right: 50px;
+  margin-left: 50px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+  color: white;
+  background-color: maroon;
+  -webkit-box-shadow: 2px 2px 2px white;
+          box-shadow: 2px 2px 2px white;
+}
+/*# sourceMappingURL=checkout.component.css.map */

@@ -15,6 +15,7 @@ export class OrderService {
   constructor(private http: HttpClient) {}
   private product = new Subject<Order[]>();
   public product$: Observable<Order[]> = this.product.asObservable();
+  order!: Order;
 
   getOrders() {
     this.http
@@ -29,17 +30,10 @@ export class OrderService {
       .delete(environment.urlOrder + id + '?companyId=17')
       .subscribe(() => this.getOrders());
   }
+
   createOrder(createBody: Order) {
-    const httpHeaders = new HttpHeaders();
-    httpHeaders.append('', 'application/json');
-
     return this.http
-      .post(
-        environment.urlOrder,
-        createBody,
-
-        { headers: httpHeaders }
-      )
+      .post<Order>(environment.urlOrder, createBody)
       .pipe(catchError(this.handleError));
   }
   handleError(error: HttpErrorResponse) {

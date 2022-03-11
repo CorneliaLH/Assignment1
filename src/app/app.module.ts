@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DarkenDirective } from './directives/darken.directive';
 import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ShoppingcartComponent } from './components/shoppingcart/shoppingcart.co
     ProductComponent,
     ShoppingcartComponent,
     DarkenDirective,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

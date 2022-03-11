@@ -24,12 +24,12 @@
       <p>Total kostnad: {{ totalPrice }} kr</p>
 
       <h3>Betalningsmetod:</h3>
-      <select name="selection-payment" [(ngModel)]="valuePayment">
+      <select name="selection-payment" [(ngModel)]="valuePayment" required>
         <option *ngFor="let pay of payment" [ngValue]="pay">{{ pay }}</option>
       </select>
 
       <h3>Fyll vänligen i användaruppgifter nedan:</h3>
-      <form [formGroup]="userInput" (ngSubmit)="submitOrder()">
+      <form [formGroup]="userInput" (ngSubmit)="sendOrderToCheckout()">
         <label for="text">Förnamn:</label>
         <input type="text" formControlName="firstname" #firstname />
         <div
@@ -82,11 +82,10 @@
             Måste vara korrekt format ex: xxx@xxx.xxx
           </p>
         </div>
-        <button type="submit" [disabled]="!userInput.valid">
-          Skicka beställning
+        <button type="submit" [disabled]="!userInput.valid || !valuePayment">
+          Granska din order
         </button>
       </form>
-      <!-- <button ">Skicka beställning</button> -->
     </article>
   </ng-template>
 </section>

@@ -30,7 +30,6 @@ export class ProductService implements IProductData {
   getCategories(): void {
     this.http.get<ICategory[]>(environment.urlCategories).subscribe((data) => {
       this.category.next(data);
-      console.log(data);
     });
   }
   searchForProduct(input: string): Observable<Product[]> {
