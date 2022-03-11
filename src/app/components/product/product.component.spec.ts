@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Product } from 'src/app/models/Product';
-
+import { FormBuilder } from '@angular/forms';
 import { ProductComponent } from './product.component';
 
 describe('ProductComponent', () => {
@@ -11,6 +11,7 @@ describe('ProductComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductComponent, TestHostComponent],
+      providers: [FormBuilder],
     }).compileComponents();
   });
 

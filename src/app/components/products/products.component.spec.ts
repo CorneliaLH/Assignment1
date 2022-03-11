@@ -10,7 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MockProductService } from 'src/app/services/mock-product.service';
-
+import { FormBuilder, Validators } from '@angular/forms';
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
@@ -21,6 +21,8 @@ describe('ProductsComponent', () => {
       imports: [RouterTestingModule, HttpClientModule],
       declarations: [ProductsComponent],
       providers: [
+        FormBuilder,
+        Validators,
         ProductService,
         HttpClientModule,
         HttpClient,

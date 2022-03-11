@@ -6,7 +6,6 @@ import { Order } from 'src/app/models/Order';
 import { ProductService } from 'src/app/services/product.service';
 import { OrderService } from 'src/app/services/order.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-shoppingcart',
