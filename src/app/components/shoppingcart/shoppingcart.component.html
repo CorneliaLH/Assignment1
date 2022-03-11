@@ -26,9 +26,6 @@
       <h3>Betalningsmetod:</h3>
       <select name="selection-payment" [(ngModel)]="valuePayment">
         <option *ngFor="let pay of payment" [ngValue]="pay">{{ pay }}</option>
-        <!-- <option [value]="2">MasterCard</option>
-        <option [value]="3">American Express</option>
-        <option [value]="4">PayPal</option> -->
       </select>
 
       <h3>Fyll vänligen i användaruppgifter nedan:</h3>

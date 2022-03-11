@@ -15,8 +15,14 @@ section {
           align-items: center;
 }
 
-ul {
-  width: 60%;
+p {
+  width: 40%;
+}
+
+.price {
+  text-align: center;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px darkblue;
 }
 
 img {

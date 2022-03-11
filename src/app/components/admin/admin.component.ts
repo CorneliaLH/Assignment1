@@ -15,7 +15,6 @@ export class AdminComponent implements OnInit {
   productList: Product[] = [];
   orderRowAmount: number = 0;
   totalAmount: number[] = [];
-  // productName: string[] = [];
 
   constructor(
     private orderService: OrderService,
@@ -23,27 +22,10 @@ export class AdminComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.orderService.getOrders();
-
-    // this.productService.products$.subscribe((data: Product[]) => {
-    //   this.productList = data;
-    //   this.productList.forEach((product) => {
-    //     this.myCompanyOrders.forEach((order) => {
-    //       if (order.orderRows.some((order) => order.productId === product.id)) {
-    //         this.productName = [];
-    //         this.productName.push(product.name);
-    //         console.log(product.name);
-
-    //         // this.productName.push(product.name)
-    //       }
-    //     });
-    //   });
-    // });
-    this.productService.getProducts();
     //Listan med orders hämtas från service
     this.orderService.product$.subscribe((data: Order[]) => {
       this.myCompanyOrders = data;
-      //loop för att skapa totala antalet produkter
+      //loop för att skapa totala antalet produkter i varje order
       this.myCompanyOrders.forEach((order) => {
         this.orderRowAmount = 0;
         order.orderRows.forEach((orderRow) => {

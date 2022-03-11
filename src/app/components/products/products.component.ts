@@ -13,6 +13,7 @@ import {
   Subject,
   switchMap,
 } from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -29,10 +30,15 @@ export class ProductsComponent implements OnInit {
   resultSearch: boolean = true;
   searchList: Product[] = [];
 
+  searchForm = this.fb.group({
+    search: ['', [Validators.minLength(2)]],
+  });
+
   constructor(
     private productservice: ProductService,
     public router: Router,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private fb: FormBuilder
   ) {}
 
   //Funktion för att presentera alla produkter

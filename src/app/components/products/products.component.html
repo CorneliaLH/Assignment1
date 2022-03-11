@@ -6,13 +6,22 @@
     </li>
   </ul>
   <article>
-    <input
-      #inputSearch
-      (input)="search(inputSearch.value)"
-      type="text"
-      placeholder="Sök efter film"
-    />
+    <form action="" [formGroup]="searchForm">
+      <input
+        #inputSearch
+        (input)="search(inputSearch.value)"
+        type="text"
+        placeholder="Sök efter film"
+        name="search"
+        formControlName="search"
+        minlength="2"
+      />
+      <span *ngIf="searchForm.get('search')?.errors?.['minlength']">
+        Det måste vara minst 2 bokstäver.
+      </span>
+    </form>
   </article>
+
   <article *ngIf="resultSearch; else noResult">
     <app-product
       *ngFor="let p of productsdisplayed"
