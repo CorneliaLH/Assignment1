@@ -6,7 +6,8 @@
     </li>
   </ul>
   <article>
-    <form action="" [formGroup]="searchForm">
+    <!---
+<form action="" [formGroup]="searchForm">
       <input
         #inputSearch
         (input)="search(inputSearch.value)"
@@ -20,6 +21,7 @@
         Det måste vara minst 2 bokstäver.
       </span>
     </form>
+--->
   </article>
 
   <article *ngIf="resultSearch; else noResult">
